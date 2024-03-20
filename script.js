@@ -75,10 +75,41 @@ popularproduct();
 function addtocart(){
     document.querySelector(".products").addEventListener("click", function(details){
         if(details.target.classList.contains("add")){
-            console.log(details.target);
+            cart.push(product[details.target.dataset.index])
         }
+
+        console.log(cart);
         
     })
 }
 
+function showcart(){
+    document.querySelector(".carticon").addEventListener("click", function(){
+        document.querySelector(".cartexpnd").style.display = "block"
+    })
+
+    var clutter = '';
+    cart.forEach(function(prod,index){
+        clutter += `  <div class="flex gap-2 bg-white p-2 rounded-lg">
+
+        <div class="w-10 h-10 flex-shrink-0 rounded-lg bg-red-500">
+        <img src="${prod.image}" alt="">
+
+        </div>
+
+       <div>
+            <h3 class="font-semibold">${prod.names}</h3> 
+            <h5 class="text-sm font-semibold opacity-80">${prod.price}</h5>
+       </div>
+
+    </div>
+`
+
+        document.querySelector(".cartexpnd").innerHTML = clutter;
+    })
+}
+
+showcart();
+
 addtocart();
+
